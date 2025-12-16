@@ -114,6 +114,7 @@ export function ShockCollar({
           '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
         color: "#ffffff",
         userSelect: "none",
+        animation: "shockCollarFadeIn 2s ease-out forwards",
       }}
     >
       {/* Pulsing indicator */}
@@ -158,6 +159,10 @@ export function ShockCollar({
       {/* CSS animation */}
       <style>
         {`
+          @keyframes shockCollarFadeIn {
+            from { opacity: 0; backdrop-filter: blur(0px); }
+            to { opacity: 1; backdrop-filter: blur(20px); }
+          }
           @keyframes shockCollarPulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(1.2); }
