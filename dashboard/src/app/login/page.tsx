@@ -2,7 +2,7 @@
 
 import { createClient } from "@/utils/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 
 function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +12,31 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   const supabase = createClient();
+
+  // Listen for auth state changes and redirect when logged in
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN" && session) {
+        // Force a refresh to update the server components with new auth state
+        router.refresh();
+        router.push("/");
+      }
+    });
+
+    // Check if already logged in on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        router.refresh();
+        router.push("/");
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [supabase, router]);
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
