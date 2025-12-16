@@ -19,8 +19,6 @@ function LoginForm() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN" && session) {
-        // Force a refresh to update the server components with new auth state
-        router.refresh();
         router.push("/");
       }
     });
@@ -28,7 +26,6 @@ function LoginForm() {
     // Check if already logged in on mount
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
-        router.refresh();
         router.push("/");
       }
     });

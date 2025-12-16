@@ -60,7 +60,6 @@ export function SettingsModal({ apiKey, refresh, onDelete }: SettingsModalProps)
       } as any); // Type assertion until we update the union type
       
       refresh();
-      router.refresh();
       setOpen(false);
     }
     setLoading(false);
@@ -85,7 +84,6 @@ export function SettingsModal({ apiKey, refresh, onDelete }: SettingsModalProps)
         } as any);
 
         refresh();
-        router.refresh();
         setOpen(false);
     }
     setLoading(false);
@@ -109,12 +107,14 @@ export function SettingsModal({ apiKey, refresh, onDelete }: SettingsModalProps)
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2 rounded-lg text-zinc-600">
+      <DialogTrigger
+        render={
+          <Button variant="outline" size="sm" className="gap-2 rounded-lg text-zinc-600">
             <Settings className="w-4 h-4" />
             Settings
-        </Button>
-      </DialogTrigger>
+          </Button>
+        }
+      />
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>Project Settings</DialogTitle>
@@ -146,12 +146,14 @@ export function SettingsModal({ apiKey, refresh, onDelete }: SettingsModalProps)
                     <p>Regenerating the key will immediately revoke the old one. You will need to update your environment variables.</p>
                 </div>
                 <AlertDialog>
-                    <AlertDialogTrigger asChild>
+                    <AlertDialogTrigger
+                      render={
                         <Button variant="outline" className="w-full justify-start text-zinc-600 gap-2 mt-2">
                             <RefreshCw className="w-4 h-4" />
                             Regenerate Key
                         </Button>
-                    </AlertDialogTrigger>
+                      }
+                    />
                     <AlertDialogContent>
                         <AlertDialogHeader>
                             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
@@ -173,12 +175,14 @@ export function SettingsModal({ apiKey, refresh, onDelete }: SettingsModalProps)
             <div className="space-y-2">
                 <Label className="text-red-600">Danger Zone</Label>
                 <AlertDialog>
-                    <AlertDialogTrigger asChild>
+                    <AlertDialogTrigger
+                      render={
                         <Button variant="destructive" className="w-full justify-start gap-2 bg-red-50 hover:bg-red-100 text-red-600 border border-red-100 shadow-none">
                             <Trash2 className="w-4 h-4" />
                             Delete Project
                         </Button>
-                    </AlertDialogTrigger>
+                      }
+                    />
                     <AlertDialogContent>
                         <AlertDialogHeader>
                             <AlertDialogTitle>Delete Project?</AlertDialogTitle>

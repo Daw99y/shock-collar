@@ -123,11 +123,13 @@ export function InstallModal({ apiKey, projectName }: InstallModalProps) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline" className="w-full shadow-sm">
-          Install Protection
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger
+        render={
+          <Button variant="outline" className="w-full shadow-sm">
+            Install Protection
+          </Button>
+        }
+      />
       <DialogContent className="max-w-4xl max-h-[85vh] flex flex-col p-0 gap-0 overflow-hidden bg-background">
         <DialogHeader className="px-6 py-4 border-b">
           <DialogTitle className="text-lg font-semibold">

@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shock Collar — Dashboard",
-  description: "Shock Collar - Remote License Management for Freelancers.",
+  title: "Shock Collar | Lock Any Website Instantly",
+  description: "The dead-simple way to lock client sites when invoices go unpaid. One toggle. Instant access control.",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} dark`}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

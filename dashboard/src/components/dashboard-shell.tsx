@@ -98,12 +98,14 @@ export function DashboardShell({ initialKeys, userEmail, userId }: DashboardShel
         {/* Bottom: User & New Project */}
         <div className="p-4 border-t border-gray-50 space-y-4">
           <Dialog>
-            <DialogTrigger asChild>
-              <Button className="w-full justify-start gap-2 bg-zinc-900 hover:bg-zinc-800 text-white shadow-sm rounded-xl">
-                <Plus className="w-4 h-4" />
-                New Project
-              </Button>
-            </DialogTrigger>
+            <DialogTrigger
+              render={
+                <Button className="w-full justify-start gap-2 bg-zinc-900 hover:bg-zinc-800 text-white shadow-sm rounded-xl">
+                  <Plus className="w-4 h-4" />
+                  New Project
+                </Button>
+              }
+            />
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Create New Project</DialogTitle>
@@ -276,9 +278,11 @@ export function DashboardShell({ initialKeys, userEmail, userId }: DashboardShel
             <h2 className="text-xl font-semibold text-zinc-900 mb-2">No Projects Selected</h2>
             <p className="text-zinc-500 mb-8">Select a project from the sidebar to view details, or create a new license key to get started.</p>
             <Dialog>
-                <DialogTrigger asChild>
+                <DialogTrigger
+                  render={
                     <Button className="bg-zinc-900 text-white rounded-xl h-10 px-6">Create New Project</Button>
-                </DialogTrigger>
+                  }
+                />
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Create New Project</DialogTitle>
@@ -298,7 +302,6 @@ export function DashboardShell({ initialKeys, userEmail, userId }: DashboardShel
 function LockToggle({ apiKey, refresh }: { apiKey: ApiKey, refresh: () => void }) {
   const [loading, setLoading] = useState(false);
   const supabase = createClient();
-  const router = useRouter(); // Grab router to force refresh logs
 
   const handleToggle = async (val: boolean) => {
     setLoading(true);
@@ -318,8 +321,7 @@ function LockToggle({ apiKey, refresh }: { apiKey: ApiKey, refresh: () => void }
     });
 
     setLoading(false);
-    refresh(); // This refreshes the parent server component
-    router.refresh(); // This triggers a re-fetch of server components including the logs (if we move logs to server) or just standard refresh
+    refresh(); // Triggers router.refresh() via parent callback
   };
 
   return (
