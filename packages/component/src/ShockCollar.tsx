@@ -103,32 +103,20 @@ export function ShockCollar({
         width: "100vw",
         height: "100vh",
         zIndex: 999999,
-        backgroundColor: "rgba(0, 0, 0, 0.95)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
+        backgroundColor: "rgba(255, 255, 255, 0.75)",
+        backdropFilter: "blur(30px) saturate(180%)",
+        WebkitBackdropFilter: "blur(30px) saturate(180%)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         fontFamily:
           '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-        color: "#ffffff",
+        color: "#1d1d1f",
         userSelect: "none",
         animation: "shockCollarFadeIn 2s ease-out forwards",
       }}
     >
-      {/* Pulsing indicator */}
-      <div
-        style={{
-          width: 12,
-          height: 12,
-          borderRadius: "50%",
-          backgroundColor: "#ef4444",
-          marginBottom: 32,
-          animation: "shockCollarPulse 2s ease-in-out infinite",
-        }}
-      />
-
       {/* Main message */}
       <h1
         style={{
@@ -147,7 +135,7 @@ export function ShockCollar({
       <p
         style={{
           fontSize: "clamp(0.875rem, 2vw, 1.125rem)",
-          color: "rgba(255, 255, 255, 0.6)",
+          color: "rgba(29, 29, 31, 0.6)",
           marginTop: 16,
           textAlign: "center",
           padding: "0 24px",
@@ -160,12 +148,8 @@ export function ShockCollar({
       <style>
         {`
           @keyframes shockCollarFadeIn {
-            from { opacity: 0; backdrop-filter: blur(0px); }
-            to { opacity: 1; backdrop-filter: blur(20px); }
-          }
-          @keyframes shockCollarPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
+            from { opacity: 0; backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px); }
+            to { opacity: 1; backdrop-filter: blur(30px) saturate(180%); -webkit-backdrop-filter: blur(30px) saturate(180%); }
           }
         `}
       </style>
