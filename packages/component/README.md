@@ -36,7 +36,6 @@ function App() {
 | `dashboardUrl` | `string` | **Required**                               | The URL of your deployed Shock Collar dashboard     |
 | `message`      | `string` | `"ACCESS RESTRICTED"`                      | Custom message to display when locked               |
 | `subtitle`     | `string` | `"Please contact the site administrator."` | Custom subtitle                                     |
-| `pollInterval` | `number` | `30000`                                    | How often to check lock status (ms)                 |
 
 ## How It Works
 
