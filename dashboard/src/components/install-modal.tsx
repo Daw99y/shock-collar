@@ -119,21 +119,14 @@ export function ShockCollar({
 }`;
 
 export function InstallModal({ apiKey, projectName }: InstallModalProps) {
-  const [copiedEnv, setCopiedEnv] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
 
   const dashboardUrl = typeof window !== "undefined" ? window.location.origin : "";
-  const envLine = `NEXT_PUBLIC_SHOCK_COLLAR_KEY="${apiKey}"`;
 
-  const copyToClipboard = async (text: string, type: "env" | "code") => {
+  const copyToClipboard = async (text: string) => {
     await navigator.clipboard.writeText(text);
-    if (type === "env") {
-      setCopiedEnv(true);
-      setTimeout(() => setCopiedEnv(false), 2000);
-    } else {
-      setCopiedCode(true);
-      setTimeout(() => setCopiedCode(false), 2000);
-    }
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2000);
   };
 
   return (
@@ -152,49 +145,15 @@ export function InstallModal({ apiKey, projectName }: InstallModalProps) {
 
         <div className="flex-1 overflow-y-auto p-6 space-y-8">
           
-          {/* Step 1: Environment Variable */}
+          {/* Step 1: Component Code */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-medium shadow-sm">
                 1
               </div>
               <div>
-                <h3 className="text-base font-semibold">Configure Environment</h3>
-                <p className="text-sm text-muted-foreground">Store your secret key safely.</p>
-              </div>
-            </div>
-            
-            <div className="ml-11">
-              <p className="text-sm text-muted-foreground mb-2">
-                Add this to your <code className="bg-muted px-1.5 py-0.5 rounded text-xs border">.env.local</code> file:
-              </p>
-              <div className="relative group">
-                <div className="bg-muted/50 rounded-xl p-4 pr-24 font-mono text-sm overflow-x-auto border shadow-sm">
-                  NEXT_PUBLIC_SHOCK_COLLAR_KEY="{apiKey}"
-                </div>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-background hover:bg-muted shadow-sm"
-                  onClick={() => copyToClipboard(envLine, "env")}
-                >
-                  {copiedEnv ? "Copied!" : "Copy"}
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-px h-8 bg-border ml-4 -my-4" />
-
-          {/* Step 2: Component Code */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-medium shadow-sm">
-                2
-              </div>
-              <div>
                 <h3 className="text-base font-semibold">Create Component</h3>
-                <p className="text-sm text-muted-foreground">Add the protection logic.</p>
+                <p className="text-sm text-muted-foreground">Add the protection logic to your project.</p>
               </div>
             </div>
             
@@ -210,7 +169,7 @@ export function InstallModal({ apiKey, projectName }: InstallModalProps) {
                   size="sm"
                   variant="secondary"
                   className="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition-opacity bg-background hover:bg-muted shadow-sm"
-                  onClick={() => copyToClipboard(COMPONENT_CODE, "code")}
+                  onClick={() => copyToClipboard(COMPONENT_CODE)}
                 >
                   {copiedCode ? "Copied!" : "Copy Code"}
                 </Button>
@@ -220,11 +179,11 @@ export function InstallModal({ apiKey, projectName }: InstallModalProps) {
 
           <div className="w-px h-8 bg-border ml-4 -my-4" />
 
-          {/* Step 3: Usage */}
+          {/* Step 2: Usage */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-medium shadow-sm">
-                3
+                2
               </div>
               <div>
                 <h3 className="text-base font-semibold">Add to Layout</h3>

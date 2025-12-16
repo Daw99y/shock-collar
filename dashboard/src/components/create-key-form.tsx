@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 function generateApiKey(): string {
   const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-  let key = "sk_live_";
+  let key = "pk_live_";
   for (let i = 0; i < 24; i++) {
     key += chars.charAt(Math.floor(Math.random() * chars.length));
   }

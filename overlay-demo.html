@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shock Collar Overlay Demo</title>
+  <style>
+    /* Fake website content behind the overlay */
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(180deg, #1d1d1f 0%, #2c2c2e 50%, #3a3a3c 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .fake-content {
+      background: white;
+      padding: 60px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    .fake-content h1 {
+      font-size: 2rem;
+      margin: 0 0 10px 0;
+      color: #1a1a1a;
+    }
+    
+    .fake-content p {
+      color: #666;
+      margin: 0;
+    }
+
+    /* ========================================
+       SHOCK COLLAR OVERLAY - PURE FROSTED GLASS
+       Clean, minimal, Apple-style
+       ======================================== */
+    .shock-collar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 999999;
+
+      /* Pure frosted glass - no stripes */
+      background: rgba(0, 0, 0, 0.3);
+      
+      /* High-quality Apple-style blur */
+      backdrop-filter: blur(40px) saturate(150%);
+      -webkit-backdrop-filter: blur(40px) saturate(150%);
+
+      /* Layout */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      /* Typography */
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #ffffff;
+      user-select: none;
+      
+      /* Subtle text shadow for readability */
+      text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Main message */
+    .main-message {
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin: 0;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    /* Subtitle */
+    .subtitle {
+      font-size: clamp(0.875rem, 2vw, 1.125rem);
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 16px;
+      text-align: center;
+      padding: 0 24px;
+      font-weight: 400;
+    }
+
+    /* Toggle button for demo */
+    .demo-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 9999999;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+      transition: all 0.2s;
+    }
+
+    .demo-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 30px rgba(16, 185, 129, 0.5);
+    }
+
+    .demo-toggle.locked {
+      background: #ef4444;
+      box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+    }
+
+    .demo-toggle.locked:hover {
+      box-shadow: 0 6px 30px rgba(239, 68, 68, 0.5);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fake website content (what's behind the overlay) -->
+  <div class="fake-content">
+    <h1>Client's Website</h1>
+    <p>This is what the client's site looks like normally.</p>
+  </div>
+
+  <!-- ========================================
+       SHOCK COLLAR OVERLAY
+       ======================================== -->
+  <div class="shock-collar-overlay hidden" id="overlay">
+    <!-- Main message -->
+    <h1 class="main-message">ACCESS RESTRICTED</h1>
+    
+    <!-- Subtitle -->
+    <p class="subtitle">Please contact the site administrator.</p>
+  </div>
+
+  <!-- Demo toggle button -->
+  <button class="demo-toggle" id="toggleBtn" onclick="toggleOverlay()">
+    🔓 Show Overlay
+  </button>
+
+  <script>
+    let isLocked = false;
+    
+    function toggleOverlay() {
+      const overlay = document.getElementById('overlay');
+      const btn = document.getElementById('toggleBtn');
+      
+      isLocked = !isLocked;
+      
+      if (isLocked) {
+        overlay.classList.remove('hidden');
+        btn.textContent = '🔒 Hide Overlay';
+        btn.classList.add('locked');
+      } else {
+        overlay.classList.add('hidden');
+        btn.textContent = '🔓 Show Overlay';
+        btn.classList.remove('locked');
+      }
+    }
+  </script>
+</body>
+</html>
