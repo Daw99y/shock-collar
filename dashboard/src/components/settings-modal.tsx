@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -35,6 +35,11 @@ export function SettingsModal({ apiKey, refresh, onDelete }: SettingsModalProps)
   const [open, setOpen] = useState(false);
   const supabase = createClient();
   const router = useRouter();
+
+  // Sync state when prop changes (fix for modal showing wrong project)
+  useEffect(() => {
+    setName(apiKey.project_name);
+  }, [apiKey]);
 
   // 1. Rename Project
   const handleRename = async () => {
